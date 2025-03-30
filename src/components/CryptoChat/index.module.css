@@ -1,0 +1,135 @@
+.cryptoChat {
+    margin: 20px 40px;
+    padding: 20px;
+    border: 1px solid #63A1D1;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+.titleChat {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.messages {
+    height: 70%;
+    overflow-y: auto;
+    border: 1px solid #B2AF9B;
+    padding: 10px;
+    background: #635843;
+    border-radius: 10px;
+}
+
+.messagesType {
+    margin-bottom: 10px;
+}
+
+.messageSystem {
+    font-style: italic;
+    color: #386A98;
+    text-align: center;
+}
+
+.messageUser {
+    background: #0E0F10;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.messageUser strong {
+    color: #63A1D1;
+}
+
+.messageUser small,
+.messageSystem small {
+    display: block;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.formChat {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.inputMessage {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #B2AF9B;
+    border-radius: 5px;
+    margin-right: 10px;
+    background: #0E0F10;
+}
+
+.button {
+    padding: 8px 12px;
+    background: #386A98;
+    border: 1px solid #63A1D1;
+    border-radius: 10px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.button:hover {
+    background: #63A1D1;
+}
+
+.button:disabled {
+    background: none;
+    border: 1px solid #B2AF9B;
+    cursor: not-allowed;
+}
+
+.connectionStatus {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    .cryptoChat {
+        margin: 10px;
+        padding: 15px;
+    }
+    .titleChat {
+        font-size: 24px;
+    }
+    .messages {
+        height: 60%;
+        padding: 8px;
+    }
+    .formChat {
+        flex-direction: column;
+    }
+    .inputMessage {
+        margin-right: 0;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    .button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .cryptoChat {
+        margin: 5px;
+        padding: 10px;
+    }
+    .titleChat {
+        font-size: 20px;
+    }
+    .messages {
+        height: 50%;
+        padding: 5px;
+    }
+    .button {
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+}
