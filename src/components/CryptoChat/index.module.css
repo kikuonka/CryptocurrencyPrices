@@ -1,9 +1,14 @@
 .cryptoChat {
-    margin: 20px 40px;
+    margin: 20px auto;
     padding: 20px;
     border: 1px solid #63A1D1;
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    height: 90vh;
+    min-width: 320px;
 }
 
 .titleChat {
@@ -13,21 +18,26 @@
 }
 
 .messages {
-    height: 70%;
+    flex: 1;
     overflow-y: auto;
     border: 1px solid #B2AF9B;
     padding: 10px;
     background: #635843;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100% - 60px);
+    min-height: 200px;
 }
 
 .messagesType {
     margin-bottom: 10px;
+    word-wrap: break-word;
 }
 
 .messageSystem {
     font-style: italic;
-    color: #386A98;
+    color: #0E0F10;
     text-align: center;
 }
 
@@ -35,6 +45,8 @@
     background: #0E0F10;
     padding: 8px;
     border-radius: 5px;
+    max-width: 90%;
+    align-self: flex-start;
 }
 
 .messageUser strong {
@@ -61,7 +73,19 @@
     padding: 8px;
     border: 1px solid #B2AF9B;
     border-radius: 5px;
-    margin-right: 10px;
+    background: #0E0F10;
+}
+
+.messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.messages::-webkit-scrollbar-thumb {
+    background: #386A98;
+    border-radius: 5px;
+}
+
+.messages::-webkit-scrollbar-track {
     background: #0E0F10;
 }
 
@@ -95,20 +119,22 @@
     .cryptoChat {
         margin: 10px;
         padding: 15px;
+        max-width: 100%;
     }
     .titleChat {
         font-size: 24px;
     }
     .messages {
+        min-height: 250px;
         height: 60%;
         padding: 8px;
     }
     .formChat {
         flex-direction: column;
+        gap: 5px;
     }
     .inputMessage {
         margin-right: 0;
-        margin-bottom: 10px;
         width: 100%;
     }
     .button {
@@ -120,13 +146,19 @@
     .cryptoChat {
         margin: 5px;
         padding: 10px;
+        height: auto;
+        min-height: 70vh;
     }
     .titleChat {
         font-size: 20px;
     }
     .messages {
+        min-height: 200px;
         height: 50%;
         padding: 5px;
+    }
+    .formChat {
+        gap: 8px;
     }
     .button {
         font-size: 14px;

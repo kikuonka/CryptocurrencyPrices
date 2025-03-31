@@ -4,6 +4,7 @@
     border: 1px solid #63A1D1;
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    max-width: 1200px;
 }
 
 .title {
@@ -99,7 +100,7 @@
     }
     .inputSearch {
         margin-right: 0;
-        width: 100%;
+        width: 98%;
     }
 }
 
@@ -113,6 +114,7 @@
     }
     .filterSorter {
         flex-direction: column;
+        gap: 5px;
     }
     .button, .filterValue {
         width: 100%;
@@ -121,10 +123,19 @@
     .liCrypto {
         flex-direction: column;
         align-items: center;
+        text-align: center;
     }
     .img {
         margin-right: 0;
         margin-bottom: 10px;
+    }
+    .inputSearch {
+        margin-right: 0;
+        width: 95%;
+    }
+    .span {
+        white-space: nowrap;
+        margin-left: 10px;
     }
 }
 
@@ -142,5 +153,9 @@
     }
     .pagination {
         flex-direction: column;
+    }
+    .inputSearch {
+        margin-right: 0;
+        width: 95%;
     }
 }

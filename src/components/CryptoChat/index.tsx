@@ -1,31 +1,33 @@
-import {useState, useEffect, useCallback} from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { io, Socket } from "socket.io-client";
 import styles from './index.module.css';
+
 type MessageType = {
     text: string;
     username?: string;
     timestamp: string;
-}
+};
 
 type SystemMessageType = {
     text: string;
     timestamp: string;
-}
+};
 
 type ChatMessage = {
     type: 'message' | 'system';
-    data: MessageType | SystemMessageType
-}
+    data: MessageType | SystemMessageType;
+};
 
 function CryptoChat() {
     const [socket, setSocket] = useState<Socket | null>(null);
     const [messages, setMessages] = useState<ChatMessage[]>([]);
     const [inputText, setInputText] = useState('');
     const [username, setUsername] = useState('');
+    const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
-        const socket = 'wss://89.169.168.253:3666';
-        const newSocket = io(socket, {
+        const socketUrl = 'ws://89.169.168.253:4500';
+        const newSocket = io(socketUrl, {
             transports: ["websocket"],
             reconnectionAttempts: 5,
             timeout: 5000,
@@ -36,23 +38,31 @@ function CryptoChat() {
             console.log('Соединение с сервером установлено');
             setSocket(newSocket);
         });
+
         newSocket.on('message', (message: MessageType) => {
-            setMessages (prev => [...prev, { type: 'message', data: message }]);
+            setMessages(prev => [...prev, { type: 'message', data: message }]);
         });
+
         newSocket.on('system', (systemMessage: SystemMessageType) => {
-            setMessages (prev => [...prev, { type: 'system', data: systemMessage }]);
+            setMessages(prev => [...prev, { type: 'system', data: systemMessage }]);
         });
+
         newSocket.on('disconnect', () => {
             console.log('Соединение с сервером разорвано');
             setSocket(null);
         });
+
         return () => {
             newSocket.disconnect();
         };
     }, []);
 
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [messages]);
+
     const sendMessage = useCallback(async () => {
-        if (!socket || ! inputText.trim()) return;
+        if (!socket || !inputText.trim()) return;
 
         if (inputText.startsWith('/name ')) {
             const newUsername = inputText.split(' ')[1];
@@ -82,21 +92,18 @@ function CryptoChat() {
                         {msg.type === 'system' ? (
                             <div className={styles.messageSystem}>
                                 <em>{msg.data.text}</em>
-                                <small>
-                                    {new Date(msg.data.timestamp).toLocaleTimeString()}
-                                </small>
+                                <small>{new Date(msg.data.timestamp).toLocaleTimeString()}</small>
                             </div>
                         ) : (
                             <div className={styles.messageUser}>
                                 <strong>{(msg.data as MessageType).username}: </strong>
                                 <span>{(msg.data as MessageType).text}</span>
-                                <small>
-                                    {new Date(msg.data.timestamp).toLocaleTimeString()}
-                                </small>
+                                <small>{new Date(msg.data.timestamp).toLocaleTimeString()}</small>
                             </div>
                         )}
                     </div>
                 ))}
+                <div ref={messagesEndRef} />
             </div>
             <form className={styles.formChat} onSubmit={handleSubmit}>
                 <input
@@ -105,9 +112,7 @@ function CryptoChat() {
                     value={inputText}
                     onChange={(e) => setInputText(e.target.value)}
                     placeholder={
-                        username
-                            ? "Введите сообщение..."
-                            : "Установите имя: /name"
+                        username ? "Введите сообщение..." : "Установите имя: /name"
                     }
                     disabled={!socket?.connected}
                 />
