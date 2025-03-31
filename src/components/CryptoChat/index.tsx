@@ -26,7 +26,7 @@ function CryptoChat() {
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
-        const socketUrl = 'ws://89.169.168.253:4500';
+        const socketUrl = 'wss://potato.ipv6b.my.id:2096';
         const newSocket = io(socketUrl, {
             transports: ["websocket"],
             reconnectionAttempts: 5,

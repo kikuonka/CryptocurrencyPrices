@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/socket.io': {
-        target: 'ws://89.169.168.253:4500',
+        target: 'wss://potato.ipv6b.my.id:2096',
         ws: true,
         changeOrigin: true,
       },
